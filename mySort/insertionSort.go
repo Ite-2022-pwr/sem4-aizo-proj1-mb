@@ -1,13 +1,15 @@
 package mySort
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
 	"projekt1/timeTrack"
 	"time"
 )
 
 func InsertionSort[T constraints.Ordered](list []T) []T {
-	defer timeTrack.TimeTrack(time.Now(), "Insertion sort")
+	name := fmt.Sprintf("Insertion sort, type: %T", *new(T))
+	defer timeTrack.TimeTrack(time.Now(), name)
 	for i := 0; i < len(list); i++ {
 		key := list[i]
 		j := i - 1

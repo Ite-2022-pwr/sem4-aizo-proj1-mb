@@ -1,6 +1,7 @@
 package mySort
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
 	"projekt1/timeTrack"
 	"time"
@@ -23,7 +24,8 @@ func heapify[T constraints.Ordered](list []T, n, i int) {
 }
 
 func HeapSort[T constraints.Ordered](list []T) []T {
-	defer timeTrack.TimeTrack(time.Now(), "Heap sort")
+	name := fmt.Sprintf("Heap sort, type: %T", *new(T))
+	defer timeTrack.TimeTrack(time.Now(), name)
 	n := len(list)
 	for i := n/2 - 1; i >= 0; i-- {
 		heapify(list, n, i)

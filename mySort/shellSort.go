@@ -1,6 +1,7 @@
 package mySort
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
 	"math"
 	"projekt1/timeTrack"
@@ -20,7 +21,8 @@ func calculateGap(n, k, gapType int) int {
 }
 
 func ShellSort[T constraints.Ordered](list []T, n, gapType int) []T {
-	defer timeTrack.TimeTrack(time.Now(), "Shell sort")
+	name := fmt.Sprintf("Shell sort, type: %T", *new(T))
+	defer timeTrack.TimeTrack(time.Now(), name)
 	k, gap := 1, n
 	for gap >= 1 {
 		gap = calculateGap(n, k, gapType)

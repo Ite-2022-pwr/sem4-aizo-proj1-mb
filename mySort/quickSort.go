@@ -1,6 +1,7 @@
 package mySort
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
 	"math/rand"
 	"projekt1/timeTrack"
@@ -68,7 +69,8 @@ func partitonRand[T constraints.Ordered](list []T, low, high int) int {
 
 func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
-		defer timeTrack.TimeTrack(time.Now(), "Quick sort, high partition")
+		name := fmt.Sprintf("Quick sort, high partition, type: %T", *new(T))
+		defer timeTrack.TimeTrack(time.Now(), name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -82,7 +84,8 @@ func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) []T 
 
 func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
-		defer timeTrack.TimeTrack(time.Now(), "Quick sort, low partition")
+		name := fmt.Sprintf("Quick sort, low partition, type: %T", *new(T))
+		defer timeTrack.TimeTrack(time.Now(), name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -96,7 +99,8 @@ func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) []T {
 
 func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
-		defer timeTrack.TimeTrack(time.Now(), "Quick sort, mid partition")
+		name := fmt.Sprintf("Quick sort, mid partition, type: %T", *new(T))
+		defer timeTrack.TimeTrack(time.Now(), name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -110,7 +114,8 @@ func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) []T {
 
 func quickSortPartitionRand[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
-		defer timeTrack.TimeTrack(time.Now(), "Quick sort, rand partition")
+		name := fmt.Sprintf("Quick sort, rand partition, type: %T", *new(T))
+		defer timeTrack.TimeTrack(time.Now(), name)
 	}
 	if low >= high || low < 0 {
 		return list
