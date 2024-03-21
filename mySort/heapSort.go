@@ -1,6 +1,10 @@
 package mySort
 
-import "golang.org/x/exp/constraints"
+import (
+	"golang.org/x/exp/constraints"
+	"projekt1/timeTrack"
+	"time"
+)
 
 func heapify[T constraints.Ordered](list []T, n, i int) {
 	var maximum = i
@@ -19,6 +23,7 @@ func heapify[T constraints.Ordered](list []T, n, i int) {
 }
 
 func HeapSort[T constraints.Ordered](list []T) []T {
+	defer timeTrack.TimeTrack(time.Now(), "Heap sort")
 	n := len(list)
 	for i := n/2 - 1; i >= 0; i-- {
 		heapify(list, n, i)

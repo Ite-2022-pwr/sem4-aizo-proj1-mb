@@ -3,6 +3,8 @@ package mySort
 import (
 	"golang.org/x/exp/constraints"
 	"math"
+	"projekt1/timeTrack"
+	"time"
 )
 
 func calculateGap(n, k, gapType int) int {
@@ -18,6 +20,7 @@ func calculateGap(n, k, gapType int) int {
 }
 
 func ShellSort[T constraints.Ordered](list []T, n, gapType int) []T {
+	defer timeTrack.TimeTrack(time.Now(), "Shell sort")
 	k, gap := 1, n
 	for gap >= 1 {
 		gap = calculateGap(n, k, gapType)

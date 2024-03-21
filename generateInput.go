@@ -22,7 +22,7 @@ func generateInput(lines, varType int, filename string) {
 		}
 	} else if varType == 1 {
 		for i := 0; i < lines; i++ {
-			temp := strconv.FormatFloat(rand.Float64()*10, 'g', -1, 64)
+			temp := strconv.FormatFloat(rand.Float64()*1000, 'g', -1, 64)
 			_, err := f.WriteString(temp + "\n")
 			Check(err)
 		}
