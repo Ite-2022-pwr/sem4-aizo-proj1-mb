@@ -1,4 +1,4 @@
-package sort
+package mySort
 
 import "golang.org/x/exp/constraints"
 
@@ -20,14 +20,12 @@ func heapify[T constraints.Ordered](list []T, n, i int) {
 
 func HeapSort[T constraints.Ordered](list []T) []T {
 	n := len(list)
-	sortedList := make([]T, n)
-	copy(sortedList, list)
 	for i := n/2 - 1; i >= 0; i-- {
-		heapify(sortedList, n, i)
+		heapify(list, n, i)
 	}
 	for i := n - 1; i > 0; i-- {
-		sortedList[0], sortedList[i] = sortedList[i], sortedList[0]
-		heapify(sortedList, i, 0)
+		list[0], list[i] = list[i], list[0]
+		heapify(list, i, 0)
 	}
-	return sortedList
+	return list
 }

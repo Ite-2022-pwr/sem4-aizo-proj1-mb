@@ -6,24 +6,31 @@ import (
 	"strconv"
 )
 
-func generateInput(lines int, filename string) {
+func generateInput(lines, varType int, filename string) {
 	f, err := os.Create(filename)
-	check(err)
+	Check(err)
 
 	defer func(f *os.File) {
 		err := f.Close()
-		check(err)
+		Check(err)
 	}(f)
-
-	for i := 0; i < lines; i++ {
-		temp := strconv.Itoa(rand.Int() % 1000)
-		_, err := f.WriteString(temp + "\n")
-		check(err)
+	if varType == 0 {
+		for i := 0; i < lines; i++ {
+			temp := strconv.Itoa(rand.Int() % 1000)
+			_, err := f.WriteString(temp + "\n")
+			Check(err)
+		}
+	} else if varType == 1 {
+		for i := 0; i < lines; i++ {
+			temp := strconv.FormatFloat(rand.Float64()*10, 'g', -1, 64)
+			_, err := f.WriteString(temp + "\n")
+			Check(err)
+		}
 	}
 
 	err = f.Sync()
 	if err != nil {
-		check(err)
+		Check(err)
 	}
 
 }

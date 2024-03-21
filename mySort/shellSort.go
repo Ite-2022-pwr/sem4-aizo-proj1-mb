@@ -1,4 +1,4 @@
-package sort
+package mySort
 
 import (
 	"golang.org/x/exp/constraints"
@@ -18,23 +18,21 @@ func calculateGap(n, k, gapType int) int {
 }
 
 func ShellSort[T constraints.Ordered](list []T, n, gapType int) []T {
-	sortedList := make([]T, len(list))
-	copy(sortedList, list)
 	k, gap := 1, n
 	for gap >= 1 {
 		gap = calculateGap(n, k, gapType)
 		k++
 		for i := gap; i < n; i++ {
-			temp := sortedList[i]
+			temp := list[i]
 			j := i
-			for j = j; j >= gap && sortedList[j-gap] > temp; j -= gap {
-				sortedList[j] = sortedList[j-gap]
+			for j = j; j >= gap && list[j-gap] > temp; j -= gap {
+				list[j] = list[j-gap]
 			}
-			sortedList[j] = temp
+			list[j] = temp
 		}
 		if gap == 1 {
 			gap = 0
 		}
 	}
-	return sortedList
+	return list
 }

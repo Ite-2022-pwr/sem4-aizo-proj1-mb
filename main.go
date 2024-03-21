@@ -2,12 +2,16 @@ package main
 
 import (
 	"fmt"
-	"projekt1/sort"
+	"projekt1/fileHandler"
+	"projekt1/mySort"
+	"sort"
 )
 
 func main() {
-	var lista []int
-	lista = append(lista, 3, 6, 1, 4, 7, 9, 11, 4, 6, 1, 2, 4, 2, 5, 9)
-	fmt.Println(lista)
-	fmt.Println(sort.QuickSort(lista, 0, len(lista)-1))
+	fh := fileHandler.FileHandler{FileName: "floaty.txt"}
+	fh.ReadFile()
+	floatLista := make([]float64, len(fh.GetFloatList()))
+	copy(floatLista, fh.GetFloatList())
+	fmt.Println(mySort.QuickSort(floatLista, 0, len(floatLista)-1, 1))
+	fmt.Println(sort.Float64sAreSorted(floatLista))
 }
