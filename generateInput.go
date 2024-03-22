@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"math/rand"
 	"os"
+	"projekt1/timeTrack"
 	"strconv"
+	"time"
 )
 
 func generateInput(lines, varType int, filename string) {
+	name := fmt.Sprintf("Generating %d lines of %s", lines, filename)
+	startTime := time.Now()
+	log.Printf("%s started at: %s", name, startTime)
+	defer timeTrack.TimeTrack(startTime, name)
 	f, err := os.Create(filename)
 	Check(err)
 

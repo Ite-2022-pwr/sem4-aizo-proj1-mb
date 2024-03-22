@@ -3,6 +3,7 @@ package mySort
 import (
 	"fmt"
 	"golang.org/x/exp/constraints"
+	"log"
 	"math/rand"
 	"projekt1/timeTrack"
 	"time"
@@ -70,7 +71,9 @@ func partitonRand[T constraints.Ordered](list []T, low, high int) int {
 func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
 		name := fmt.Sprintf("Quick sort, high partition, type: %T", *new(T))
-		defer timeTrack.TimeTrack(time.Now(), name)
+		startTime := time.Now()
+		log.Printf("%s started at: %s", name, startTime)
+		defer timeTrack.TimeTrack(startTime, name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -85,7 +88,9 @@ func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) []T 
 func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
 		name := fmt.Sprintf("Quick sort, low partition, type: %T", *new(T))
-		defer timeTrack.TimeTrack(time.Now(), name)
+		startTime := time.Now()
+		log.Printf("%s started at: %s", name, startTime)
+		defer timeTrack.TimeTrack(startTime, name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -100,7 +105,9 @@ func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) []T {
 func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
 		name := fmt.Sprintf("Quick sort, mid partition, type: %T", *new(T))
-		defer timeTrack.TimeTrack(time.Now(), name)
+		startTime := time.Now()
+		log.Printf("%s started at: %s", name, startTime)
+		defer timeTrack.TimeTrack(startTime, name)
 	}
 	if low >= high || low < 0 {
 		return list
@@ -115,7 +122,9 @@ func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) []T {
 func quickSortPartitionRand[T constraints.Ordered](list []T, low, high int) []T {
 	if low == 0 && high == len(list)-1 {
 		name := fmt.Sprintf("Quick sort, rand partition, type: %T", *new(T))
-		defer timeTrack.TimeTrack(time.Now(), name)
+		startTime := time.Now()
+		log.Printf("%s started at: %s", name, startTime)
+		defer timeTrack.TimeTrack(startTime, name)
 	}
 	if low >= high || low < 0 {
 		return list

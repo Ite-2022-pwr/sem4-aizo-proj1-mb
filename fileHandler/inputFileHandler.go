@@ -6,13 +6,13 @@ import (
 	"strconv"
 )
 
-type FileHandler struct {
+type InputFileHandler struct {
 	FileName string
 	file     *os.File
 	List     []string
 }
 
-func (fh *FileHandler) ReadFile() {
+func (fh *InputFileHandler) ReadFile() {
 	fh.file, _ = os.Open(fh.FileName)
 	scanner := bufio.NewScanner(fh.file)
 	for scanner.Scan() {
@@ -21,7 +21,7 @@ func (fh *FileHandler) ReadFile() {
 	}
 }
 
-func (fh *FileHandler) GetIntList() []int {
+func (fh *InputFileHandler) GetIntList() []int {
 	var intList []int
 	for i := 0; i < len(fh.List); i++ {
 		line := fh.List[i]
@@ -31,7 +31,7 @@ func (fh *FileHandler) GetIntList() []int {
 	return intList
 }
 
-func (fh *FileHandler) GetFloatList() []float64 {
+func (fh *InputFileHandler) GetFloatList() []float64 {
 	var floatList []float64
 	for i := 0; i < len(fh.List); i++ {
 		line := fh.List[i]

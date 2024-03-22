@@ -1,115 +1,31 @@
 package main
 
 import (
-	"log"
-	"projekt1/fileHandler"
-	"projekt1/mySort"
-	"sort"
+	"flag"
 	"sync"
 )
 
 func main() {
-	n := 1000000
-	generateInput(n, 1, "floaty.txt")
-	generateInput(n, 0, "inty.txt")
-	fhF := fileHandler.FileHandler{FileName: "floaty.txt"}
-	fhF.ReadFile()
-
-	fhI := fileHandler.FileHandler{FileName: "inty.txt"}
-	fhI.ReadFile()
-	floatlists := make([][]float64, 7)
-	intLists := make([][]int, 7)
-	var wg sync.WaitGroup
-	for i := 0; i < 7; i++ {
+	quickRunPtr := flag.Bool("quick-run", true, "if true run default tests")
+	sortMethodPtr := flag.String("sort-method", "q", "sorting algorithm(q-quick, i-insertion, h-heap, s-shell), default option: q")
+	shellSortGapPtr := flag.Int("ss-gap", 0, "shell sort gap calculation(0-shell, 1-franklazarus), default option: shell")
+	quickSortPiwotPtr := flag.Int("qs-pivot", 0, "choose pivot selection method for quicksort(0-high, 1-low, 2-mid, 3-rand), default option: high")
+	variableTypePtr := flag.Int("var-type", 0, "variable type for sorting (0-int, 1-float), default option: int")
+	inputFilePtr := flag.String("input", "input.txt", "name of input file, default: input.txt")
+	repetitionPtr := flag.Int("reps", 1, "number of repetitions, default: 1")
+	generationLengthPtr := flag.Int("generate-length", 10000, "number of lines in new input, default: 10000")
+	generationPtr := flag.Bool("generate-new-input", false, "generate new input file, may overwrite existing one if filename option is name of existing file, default option: false")
+	outputFilePtr := flag.String("output", "output.csv", "name of output file, by default: output.csv")
+	flag.Parse()
+	if *quickRunPtr {
+		wg := sync.WaitGroup{}
 		wg.Add(1)
 		go func() {
-			floatlists[i] = make([]float64, n)
-			intLists[i] = make([]int, n)
-			copy(floatlists[i], fhF.GetFloatList())
-			copy(intLists[i], fhI.GetIntList())
+			quickRun()
 			wg.Done()
 		}()
+		wg.Wait()
+	} else {
+		run(*inputFilePtr, *outputFilePtr, *sortMethodPtr, *shellSortGapPtr, *quickSortPiwotPtr, *variableTypePtr, *repetitionPtr, *generationLengthPtr, *generationPtr)
 	}
-	wg.Wait()
-
-	var sortFWG sync.WaitGroup
-	sortFWG.Add(7)
-
-	go func() {
-		mySort.InsertionSort(floatlists[0])
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[0]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.HeapSort(floatlists[1])
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[1]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.ShellSort(floatlists[2], len(floatlists[2]), 1)
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[2]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(floatlists[3], 0, len(floatlists[3])-1, 0)
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[3]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(floatlists[4], 0, len(floatlists[4])-1, 1)
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[4]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(floatlists[5], 0, len(floatlists[5])-1, 2)
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[5]))
-		sortFWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(floatlists[6], 0, len(floatlists[6])-1, 3)
-		log.Printf("properly sorted %v", sort.Float64sAreSorted(floatlists[6]))
-		sortFWG.Done()
-	}()
-	sortFWG.Wait()
-
-	var sortIWG sync.WaitGroup
-	sortIWG.Add(7)
-
-	go func() {
-		mySort.InsertionSort(intLists[0])
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[0]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.HeapSort(intLists[1])
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[1]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.ShellSort(intLists[2], len(intLists[2]), 1)
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[2]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(intLists[3], 0, len(intLists[3])-1, 0)
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[3]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(intLists[4], 0, len(intLists[4])-1, 1)
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[4]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(intLists[5], 0, len(intLists[5])-1, 2)
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[5]))
-		sortIWG.Done()
-	}()
-	go func() {
-		mySort.QuickSort(intLists[6], 0, len(intLists[6])-1, 3)
-		log.Printf("properly sorted %v", sort.IntsAreSorted(intLists[6]))
-		sortIWG.Done()
-	}()
-	sortIWG.Wait()
-
 }
