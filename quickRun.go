@@ -25,7 +25,7 @@ func QuickRun() {
 		go func() {
 			floatlists[i] = make([]float64, n)
 			intLists[i] = make([]int, n)
-			copy(floatlists[i], fhF.GetFloatList())
+			copy(floatlists[i], fhF.GetFloat64List())
 			copy(intLists[i], fhI.GetIntList())
 			wg.Done()
 		}()

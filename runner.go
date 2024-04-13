@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"golang.org/x/exp/constraints"
 	"projekt1/fileHandler"
 	"projekt1/mySort"
@@ -23,9 +22,8 @@ func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int
 		}
 	} else if vartype == 1 {
 		for i := 0; i < reps; i++ {
-			floatList := make([]float64, len(ifh.GetFloatList()))
-			copy(floatList, ifh.GetShuffledFloatList())
-			fmt.Println(floatList)
+			floatList := make([]float64, len(ifh.GetFloat64List()))
+			copy(floatList, ifh.GetShuffledFloat64List())
 			runSort(method, ssgap, qspivot, i, floatList, ofh)
 		}
 	}
@@ -34,19 +32,17 @@ func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int
 
 func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list []T, ofh fileHandler.OutputFileHandler) {
 	var timeTracked int64
-	var sortedList []T
 	switch method {
 	case "q":
-		sortedList, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	case "i":
-		sortedList, timeTracked = mySort.InsertionSort(list)
+		_, timeTracked = mySort.InsertionSort(list)
 	case "h":
-		sortedList, timeTracked = mySort.HeapSort(list)
+		_, timeTracked = mySort.HeapSort(list)
 	case "s":
-		sortedList, timeTracked = mySort.ShellSort(list, len(list), ssgap)
+		_, timeTracked = mySort.ShellSort(list, len(list), ssgap)
 	default:
-		sortedList, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	}
 	ofh.AddResult(timeTracked, len(list), rep)
-	fmt.Println(sortedList)
 }

@@ -21,11 +21,10 @@ func calculateGap(n, k, gapType int) int {
 	return gap
 }
 
-func ShellSort[T constraints.Ordered](list []T, n, gapType int) ([]T, int64) {
-	name := fmt.Sprintf("Shell sort, type: %T", *new(T))
+func ShellSort[T constraints.Ordered](list []T, n, gapType int) (sortedList []T, timeTracked int64) {
+	name := fmt.Sprintf("Shell sort, na typie: %T", *new(T))
 	startTime := time.Now()
-	log.Printf("%s started at: %s", name, startTime)
-	var timeTracked int64
+	log.Printf("%s rozpoczęto o: %s", name, startTime)
 	defer func() {
 		timeTracked = timeTrack.TimeTrack(startTime, name)
 	}()
@@ -45,5 +44,5 @@ func ShellSort[T constraints.Ordered](list []T, n, gapType int) ([]T, int64) {
 			gap = 0
 		}
 	}
-	return list, timeTracked
+	return list, 0
 }

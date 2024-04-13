@@ -8,11 +8,10 @@ import (
 	"time"
 )
 
-func InsertionSort[T constraints.Ordered](list []T) ([]T, int64) {
-	name := fmt.Sprintf("Insertion sort, type: %T", *new(T))
+func InsertionSort[T constraints.Ordered](list []T) (sortedList []T, timeTracked int64) {
+	name := fmt.Sprintf("Insertion sort, na typie: %T", *new(T))
 	startTime := time.Now()
-	log.Printf("%s started at: %s", name, startTime)
-	var timeTracked int64
+	log.Printf("%s rozpoczęto o: %s", name, startTime)
 	defer func() {
 		timeTracked = timeTrack.TimeTrack(startTime, name)
 	}()
@@ -28,5 +27,5 @@ func InsertionSort[T constraints.Ordered](list []T) ([]T, int64) {
 		//elapsed := time.Since(roundTime)
 		//log.Printf("Round %d took %s", i, elapsed)
 	}
-	return list, timeTracked
+	return list, 0
 }

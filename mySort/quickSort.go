@@ -68,87 +68,83 @@ func partitonRand[T constraints.Ordered](list []T, low, high int) int {
 	return i
 }
 
-func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) ([]T, int64) {
-	var timeTracked int64
+func quickSortPartitionHigh[T constraints.Ordered](list []T, low, high int) (sortedList []T, timeTracked int64) {
 	if low == 0 && high == len(list)-1 {
-		name := fmt.Sprintf("Quick sort, high partition, type: %T", *new(T))
+		name := fmt.Sprintf("Quick sort, wysoki pivot, na typie: %T", *new(T))
 		startTime := time.Now()
-		log.Printf("%s started at: %s", name, startTime)
+		log.Printf("%s rozpoczęto o: %s", name, startTime)
 		defer func() {
 			timeTracked = timeTrack.TimeTrack(startTime, name)
 		}()
 	}
 	if low >= high || low < 0 {
-		return list, timeTracked
+		return list, 0
 	}
 	pivot := partitonHigh(list, low, high)
 
 	quickSortPartitionHigh(list, low, pivot-1)
 	quickSortPartitionHigh(list, pivot+1, high)
-	return list, timeTracked
+	return list, 0
 }
 
-func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) ([]T, int64) {
-	var timeTracked int64
+func quickSortPartitionLow[T constraints.Ordered](list []T, low, high int) (sortedList []T, timeTracked int64) {
 	if low == 0 && high == len(list)-1 {
-		name := fmt.Sprintf("Quick sort, low partition, type: %T", *new(T))
+		name := fmt.Sprintf("Quick sort, niski pivot, na typie: %T", *new(T))
 		startTime := time.Now()
-		log.Printf("%s started at: %s", name, startTime)
+		log.Printf("%s rozpoczęto o: %s", name, startTime)
 		defer func() {
 			timeTracked = timeTrack.TimeTrack(startTime, name)
 		}()
 	}
 	if low >= high || low < 0 {
-		return list, timeTracked
+		return list, 0
 	}
 	pivot := partitonLow(list, low, high)
 
 	quickSortPartitionLow(list, low, pivot-1)
 	quickSortPartitionLow(list, pivot+1, high)
-	return list, timeTracked
+	return list, 0
 }
 
-func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) ([]T, int64) {
-	var timeTracked int64
+func quickSortPartitionMid[T constraints.Ordered](list []T, low, high int) (sortedList []T, timeTracked int64) {
 	if low == 0 && high == len(list)-1 {
-		name := fmt.Sprintf("Quick sort, mid partition, type: %T", *new(T))
+		name := fmt.Sprintf("Quick sort, środkowy pivot, na typie: %T", *new(T))
 		startTime := time.Now()
-		log.Printf("%s started at: %s", name, startTime)
+		log.Printf("%s rozpoczęto o: %s", name, startTime)
 		defer func() {
 			timeTracked = timeTrack.TimeTrack(startTime, name)
 		}()
 	}
 	if low >= high || low < 0 {
-		return list, timeTracked
+		return list, 0
 	}
 	pivot := partitonMid(list, low, high)
 
 	quickSortPartitionMid(list, low, pivot-1)
 	quickSortPartitionMid(list, pivot+1, high)
-	return list, timeTracked
+	return list, 0
 }
 
-func quickSortPartitionRand[T constraints.Ordered](list []T, low, high int) ([]T, int64) {
-	var timeTracked int64
+func quickSortPartitionRand[T constraints.Ordered](list []T, low, high int) (sortedList []T, timeTracked int64) {
 	if low == 0 && high == len(list)-1 {
-		name := fmt.Sprintf("Quick sort, rand partition, type: %T", *new(T))
+		name := fmt.Sprintf("Quick sort, losowy pivot, na typie: %T", *new(T))
 		startTime := time.Now()
-		log.Printf("%s started at: %s", name, startTime)
+		log.Printf("%s rozpoczęto o: %s", name, startTime)
 		defer func() {
 			timeTracked = timeTrack.TimeTrack(startTime, name)
 		}()
 	}
 	if low >= high || low < 0 {
-		return list, timeTracked
+		return list, 0
 	}
 	pivot := partitonRand(list, low, high)
 
 	quickSortPartitionRand(list, low, pivot-1)
 	quickSortPartitionRand(list, pivot+1, high)
-	return list, timeTracked
+	return list, 0
 }
 
-func QuickSort[T constraints.Ordered](list []T, low, high, partitonType int) ([]T, int64) {
+func QuickSort[T constraints.Ordered](list []T, low, high, partitonType int) (sortedList []T, timeTracked int64) {
 	switch partitonType {
 	case 0:
 		return quickSortPartitionHigh(list, low, high)

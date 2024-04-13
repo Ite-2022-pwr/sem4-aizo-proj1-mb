@@ -16,8 +16,11 @@ func main() {
 	generationLengthPtr := flag.Int("generate-length", 10000, "number of lines in new input, default: 10000")
 	generationPtr := flag.Bool("generate-new-input", false, "generate new input file, may overwrite existing one if filename option is name of existing file, default option: false")
 	outputFilePtr := flag.String("output", "output.csv", "name of output file, by default: output.csv")
+	interactivePtr := flag.Bool("interactive", true, "choose if you want to use interactive mode, default option: true")
 	flag.Parse()
-	if *quickRunPtr {
+	if *interactivePtr {
+		Menu()
+	} else if *quickRunPtr {
 		wg := sync.WaitGroup{}
 		wg.Add(1)
 		go func() {

@@ -7,6 +7,6 @@ import (
 
 func TimeTrack(start time.Time, name string) int64 {
 	elapsed := time.Since(start)
-	log.Printf("%s took %s", name, elapsed)
+	log.Printf("%s zajęło %s", name, elapsed)
 	return elapsed.Nanoseconds()
 }
