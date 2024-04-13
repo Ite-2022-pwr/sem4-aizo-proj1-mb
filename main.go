@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"fmt"
+	"projekt1/utils"
 	"sync"
 )
 
@@ -17,8 +19,16 @@ func main() {
 	generationPtr := flag.Bool("generate-new-input", false, "generate new input file, may overwrite existing one if filename option is name of existing file, default option: false")
 	outputFilePtr := flag.String("output", "output.csv", "name of output file, by default: output.csv")
 	interactivePtr := flag.Bool("interactive", true, "choose if you want to use interactive mode, default option: true")
+	magicFlagPtr := flag.Bool("magic", false, "magic flag")
+	fullBenchmarkPtr := flag.Bool("full-benchmark", false, "run full benchmark")
 	flag.Parse()
-	if *interactivePtr {
+	if *magicFlagPtr {
+		fmt.Println("Magic flag was set!")
+		utils.GenerateInputsForTests()
+	}
+	if *fullBenchmarkPtr {
+		RunFullBenchmark()
+	} else if *interactivePtr {
 		Menu()
 	} else if *quickRunPtr {
 		wg := sync.WaitGroup{}
@@ -29,7 +39,7 @@ func main() {
 		}()
 		wg.Wait()
 	} else {
-		Run(
+		utils.Run(
 			*inputFilePtr,
 			*outputFilePtr,
 			*sortMethodPtr,

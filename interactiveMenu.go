@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"projekt1/fileHandler"
+	"projekt1/utils"
 	"strconv"
 	"strings"
 )
@@ -81,105 +82,20 @@ func Menu() {
 	ofh := fileHandler.OutputFileHandler{FileName: outputFilename}
 	intRepeats, _ := strconv.ParseInt(repeats, 10, 64)
 	ofh.InitializeSlices(int(intRepeats))
+	intTypeChoosen, _ := strconv.ParseInt(typeChosen, 10, 64)
+	intQsPivot, _ := strconv.ParseInt(qsPivot, 10, 64)
+	intShellGap, _ := strconv.ParseInt(shellGap, 10, 64)
+	intLines, _ := strconv.ParseInt(lines, 10, 64)
+	intRepeats, _ = strconv.ParseInt(repeats, 10, 64)
 
 	if dataSource == "0" {
 		ifh = fileHandler.InputFileHandler{FileName: filename}
 		ifh.ReadFile()
-		runSortFromFile(typeChosen, sortingAlgorithm, qsPivot, shellGap, repeats, ifh, ofh)
+		utils.RunSortFromFile(int(intTypeChoosen), sortingAlgorithm, int(intQsPivot), int(intShellGap), int(intRepeats), ifh, ofh)
 	} else {
-		runSortOfType(typeChosen, sortingAlgorithm, qsPivot, shellGap, repeats, lines, ofh)
+		utils.RunSortOfType(int(intTypeChoosen), sortingAlgorithm, int(intQsPivot), int(intShellGap), int(intRepeats), int(intLines), ofh)
 	}
 
 	ofh.WriteToFile()
 
-}
-
-func runSortFromFile(typeChosen, sortType, qsPivot, ssGap, reps string, ifh fileHandler.InputFileHandler, ofh fileHandler.OutputFileHandler) {
-	intTypeChosen, _ := strconv.ParseInt(typeChosen, 10, 64)
-	intSsGap, _ := strconv.ParseInt(ssGap, 10, 64)
-	intQsPivot, _ := strconv.ParseInt(qsPivot, 10, 64)
-	intReps, _ := strconv.ParseInt(reps, 10, 64)
-
-	switch intTypeChosen {
-	case 0:
-		list := ifh.GetIntList()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 1:
-		list := ifh.GetFloat64List()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 2:
-		list := ifh.GetFloat32List()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 3:
-		list := ifh.GetInt32List()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 4:
-		list := ifh.GetInt64List()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 5:
-		list := ifh.GetStringList()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	default:
-		list := ifh.GetIntList()
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	}
-}
-
-func runSortOfType(typeChosen, sortType, qsPivot, ssGap, reps, lines string, ofh fileHandler.OutputFileHandler) {
-	intTypeChosen, _ := strconv.ParseInt(typeChosen, 10, 64)
-	intSsGap, _ := strconv.ParseInt(ssGap, 10, 64)
-	intQsPivot, _ := strconv.ParseInt(qsPivot, 10, 64)
-	intReps, _ := strconv.ParseInt(reps, 10, 64)
-	intLines, _ := strconv.ParseInt(lines, 10, 64)
-	switch intTypeChosen {
-	case 0:
-		list := GenerateRandomIntList(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 1:
-		list := GenerateRandomFloat64List(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 2:
-		list := GenerateRandomFloat32List(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 3:
-		list := GenerateRandomInt32List(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 4:
-		list := GenerateRandomInt64List(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	case 5:
-		list := GenerateRandomStringList(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	default:
-		list := GenerateRandomIntList(int(intLines))
-		for i := 0; i < int(intReps); i++ {
-			runSort(sortType, int(intSsGap), int(intQsPivot), i, list, ofh)
-		}
-	}
 }
