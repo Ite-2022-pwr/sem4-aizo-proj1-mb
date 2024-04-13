@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
+	"math"
 	"projekt1/fileHandler"
 	"projekt1/mySort"
 )
@@ -32,6 +34,16 @@ func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int
 
 func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list []T, ofh fileHandler.OutputFileHandler) {
 	var timeTracked int64
+	fmt.Print("pierwsze 10% lub 50 elementów listy przed sortowaniem: [")
+	firstTenPercent := int(math.Ceil(float64(len(list)) * 0.1))
+	if firstTenPercent > 50 {
+		firstTenPercent = 50
+	}
+	for i := 0; i < firstTenPercent; i++ {
+		fmt.Print(list[i], ", ")
+	}
+	fmt.Print("...]\n")
+	fmt.Println()
 	switch method {
 	case "q":
 		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
