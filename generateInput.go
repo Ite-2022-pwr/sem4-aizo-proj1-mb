@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func generateInputToFile(lines, varType int, filename string) {
+func GenerateInputToFile(lines, varType int, filename string) {
 	name := fmt.Sprintf("Generating %d lines of %s", lines, filename)
 	startTime := time.Now()
 	log.Printf("%s started at: %s", name, startTime)
@@ -42,5 +42,18 @@ func generateInputToFile(lines, varType int, filename string) {
 	if err != nil {
 		Check(err)
 	}
+}
 
+func GenerateList[T int | float64](length, listType int) []T {
+	output := make([]T, length)
+	if listType == 0 {
+		for i := 0; i < length; i++ {
+			output[i] = T(rand.Int() % 1000)
+		}
+	} else if listType == 1 {
+		for i := 0; i < length; i++ {
+			output[i] = T(rand.Float64() * 1000)
+		}
+	}
+	return output
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"golang.org/x/exp/constraints"
 	"projekt1/fileHandler"
 	"projekt1/mySort"
@@ -8,7 +9,7 @@ import (
 
 func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int, newinput bool) {
 	if newinput {
-		generateInputToFile(genlen, vartype, input)
+		GenerateInputToFile(genlen, vartype, input)
 	}
 	ifh := fileHandler.InputFileHandler{FileName: input}
 	ifh.ReadFile()
@@ -17,13 +18,14 @@ func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int
 	if vartype == 0 {
 		for i := 0; i < reps; i++ {
 			intList := make([]int, len(ifh.GetIntList()))
-			copy(intList, ifh.GetIntList())
+			copy(intList, ifh.GetShuffledIntList())
 			runSort(method, ssgap, qspivot, i, intList, ofh)
 		}
 	} else if vartype == 1 {
 		for i := 0; i < reps; i++ {
 			floatList := make([]float64, len(ifh.GetFloatList()))
-			copy(floatList, ifh.GetFloatList())
+			copy(floatList, ifh.GetShuffledFloatList())
+			fmt.Println(floatList)
 			runSort(method, ssgap, qspivot, i, floatList, ofh)
 		}
 	}
@@ -32,17 +34,19 @@ func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int
 
 func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list []T, ofh fileHandler.OutputFileHandler) {
 	var timeTracked int64
+	var sortedList []T
 	switch method {
 	case "q":
-		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		sortedList, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	case "i":
-		_, timeTracked = mySort.InsertionSort(list)
+		sortedList, timeTracked = mySort.InsertionSort(list)
 	case "h":
-		_, timeTracked = mySort.HeapSort(list)
+		sortedList, timeTracked = mySort.HeapSort(list)
 	case "s":
-		_, timeTracked = mySort.ShellSort(list, len(list), ssgap)
+		sortedList, timeTracked = mySort.ShellSort(list, len(list), ssgap)
 	default:
-		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		sortedList, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	}
 	ofh.AddResult(timeTracked, len(list), rep)
+	fmt.Println(sortedList)
 }
