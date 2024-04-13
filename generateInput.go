@@ -17,6 +17,8 @@ func generateInputToFile(lines, varType int, filename string) {
 	defer timeTrack.TimeTrack(startTime, name)
 	f, err := os.Create(filename)
 	Check(err)
+	_, err = f.WriteString(string(lines) + "\n")
+	Check(err)
 
 	defer func(f *os.File) {
 		err := f.Close()

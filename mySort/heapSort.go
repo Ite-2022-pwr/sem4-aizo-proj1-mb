@@ -24,11 +24,13 @@ func heapify[T constraints.Ordered](list []T, n, i int) {
 	}
 }
 
-func HeapSort[T constraints.Ordered](list []T) []T {
+func HeapSort[T constraints.Ordered](list []T) (sortedList []T, timeTracked int64) {
 	name := fmt.Sprintf("Heap sort, type: %T", *new(T))
 	startTime := time.Now()
 	log.Printf("%s started at: %s", name, startTime)
-	defer timeTrack.TimeTrack(startTime, name)
+	defer func() {
+		timeTracked = timeTrack.TimeTrack(startTime, name)
+	}()
 	n := len(list)
 	for i := n/2 - 1; i >= 0; i-- {
 		heapify(list, n, i)
@@ -37,5 +39,5 @@ func HeapSort[T constraints.Ordered](list []T) []T {
 		list[0], list[i] = list[i], list[0]
 		heapify(list, i, 0)
 	}
-	return list
+	return list, 0
 }
