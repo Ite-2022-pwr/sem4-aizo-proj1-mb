@@ -21,11 +21,21 @@ func main() {
 		wg := sync.WaitGroup{}
 		wg.Add(1)
 		go func() {
-			quickRun()
+			QuickRun()
 			wg.Done()
 		}()
 		wg.Wait()
 	} else {
-		run(*inputFilePtr, *outputFilePtr, *sortMethodPtr, *shellSortGapPtr, *quickSortPiwotPtr, *variableTypePtr, *repetitionPtr, *generationLengthPtr, *generationPtr)
+		Run(
+			*inputFilePtr,
+			*outputFilePtr,
+			*sortMethodPtr,
+			*shellSortGapPtr,
+			*quickSortPiwotPtr,
+			*variableTypePtr,
+			*repetitionPtr,
+			*generationLengthPtr,
+			*generationPtr,
+		)
 	}
 }

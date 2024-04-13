@@ -2,6 +2,7 @@ package fileHandler
 
 import (
 	"bufio"
+	"log"
 	"os"
 	"strconv"
 )
@@ -10,12 +11,16 @@ type InputFileHandler struct {
 	FileName string
 	file     *os.File
 	List     []string
+	Lines    int
 }
 
 func (fh *InputFileHandler) ReadFile() {
 	fh.file, _ = os.Open(fh.FileName)
 	scanner := bufio.NewScanner(fh.file)
-	for scanner.Scan() {
+	scanner.Scan()
+	fh.Lines, _ = strconv.Atoi(scanner.Text())
+	log.Printf("%d lines in file", fh.Lines)
+	for i := 0; i < fh.Lines; i++ {
 		lineStr := scanner.Text()
 		fh.List = append(fh.List, lineStr)
 	}

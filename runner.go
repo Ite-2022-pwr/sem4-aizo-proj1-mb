@@ -6,9 +6,9 @@ import (
 	"projekt1/mySort"
 )
 
-func run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int, newinput bool) {
+func Run(input, output, method string, ssgap, qspivot, vartype, reps, genlen int, newinput bool) {
 	if newinput {
-		generateInput(genlen, vartype, input)
+		generateInputToFile(genlen, vartype, input)
 	}
 	ifh := fileHandler.InputFileHandler{FileName: input}
 	ifh.ReadFile()

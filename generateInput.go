@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-func generateInput(lines, varType int, filename string) {
+func generateInputToFile(lines, varType int, filename string) {
 	name := fmt.Sprintf("Generating %d lines of %s", lines, filename)
 	startTime := time.Now()
 	log.Printf("%s started at: %s", name, startTime)

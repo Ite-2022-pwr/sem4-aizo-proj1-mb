@@ -8,7 +8,7 @@ import (
 	"sync"
 )
 
-func quickRun() {
+func QuickRun() {
 	n := 100000
 	//generateInput(n, 1, "floaty.txt")
 	//generateInput(n, 0, "inty.txt")
