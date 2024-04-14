@@ -35,7 +35,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
@@ -49,7 +49,7 @@ jobs:
         id: upload-release-assets
         uses: actions/upload-release-asset@v1
         env:
-          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./sem4_aizo_proj1_mb_windows_amd64.exe
@@ -59,7 +59,7 @@ jobs:
       - name: Upload macOS (Intel) build
         uses: actions/upload-release-asset@v1
         env:
-          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./sem4_aizo_proj1_mb_darwin_amd64
@@ -69,7 +69,7 @@ jobs:
       - name: Upload macOS (ARM) build
         uses: actions/upload-release-asset@v1
         env:
-          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./sem4_aizo_proj1_mb_darwin_arm64
@@ -79,7 +79,7 @@ jobs:
       - name: Upload Linux build
         uses: actions/upload-release-asset@v1
         env:
-          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./sem4_aizo_proj1_mb_linux_amd64
