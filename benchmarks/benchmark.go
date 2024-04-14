@@ -13,7 +13,7 @@ func SingleConfigBenchmark(typeChosen, pivotChosen, ssGapChosen, repsChosen int,
 	ssGapChosenName := utils.SsGapNameChooser(ssGapChosen)
 	sortingMethodChosenName := utils.SortingMethodNameChooser(sortingMethodChosen)
 	if sortingMethodChosen == "q" {
-		for i := 1; i <= 10; i++ {
+		for i := 0; i <= 7; i++ {
 			ifh := fileHandler.InputFileHandler{FileName: fmt.Sprintf("%s%s-%d.txt", caseTypeChosen, typeName, i)}
 			ifh.ReadFile()
 			log.Printf("Sortowanie %s z pivotem %s dla typu %s, na przypadku tablicy %s,  wielkości %d linii", sortingMethodChosenName, pivotChosenName, typeName, caseTypeChosen, ifh.Lines)
@@ -23,7 +23,7 @@ func SingleConfigBenchmark(typeChosen, pivotChosen, ssGapChosen, repsChosen int,
 			ofh.WriteToFile()
 		}
 	} else if sortingMethodChosen == "s" {
-		for i := 1; i <= 10; i++ {
+		for i := 0; i <= 7; i++ {
 			ifh := fileHandler.InputFileHandler{FileName: fmt.Sprintf("%s%s-%d.txt", caseTypeChosen, typeName, i)}
 			ifh.ReadFile()
 			log.Printf("Sortowanie %s z przerwą %s dla typu %s, na przypadku tablicy %s,  wielkości %d linii", sortingMethodChosenName, ssGapChosenName, typeName, caseTypeChosen, ifh.Lines)
@@ -33,7 +33,7 @@ func SingleConfigBenchmark(typeChosen, pivotChosen, ssGapChosen, repsChosen int,
 			ofh.WriteToFile()
 		}
 	} else {
-		for i := 1; i <= 10; i++ {
+		for i := 0; i <= 7; i++ {
 			ifh := fileHandler.InputFileHandler{FileName: fmt.Sprintf("%s%s-%d.txt", caseTypeChosen, typeName, i)}
 			ifh.ReadFile()
 			log.Printf("Sortowanie %s dla typu %s, na przypadku tablicy %s, wielkości %d linii", sortingMethodChosenName, typeName, caseTypeChosen, ifh.Lines)
