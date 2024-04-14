@@ -17,10 +17,10 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.22.2' # You can change this to your desired Go version
+          go-version: '1.16'
 
       - name: Build for Windows
-        run: GOOS=windows GOARCH=amd64 go build -o sem4_aizo_proj1_mb_amd64.exe .
+        run: GOOS=windows GOARCH=amd64 go build -o sem4_aizo_proj1_mb_windows_amd64.exe .
 
       - name: Build for macOS (Intel)
         run: GOOS=darwin GOARCH=amd64 go build -o sem4_aizo_proj1_mb_darwin_amd64 .
@@ -35,7 +35,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
+          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
@@ -45,26 +45,43 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Windows build
-        uses: actions/upload-artifact@v2
+      - name: Upload Release Assets
+        id: upload-release-assets
+        uses: actions/upload-release-asset@v1
+        env:
+          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
-          name: sem4_aizo_proj1_mb
-          path: ./sem4_aizo_proj1_mb_amd64.exe
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sem4_aizo_proj1_mb_windows_amd64.exe
+          asset_name: sem4_aizo_proj1_mb_windows_amd64.exe
+          asset_content_type: application/octet-stream
 
       - name: Upload macOS (Intel) build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-release-asset@v1
+        env:
+          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
-          name: sem4_aizo_proj1_mb
-          path: ./sem4_aizo_proj1_mb_darwin_amd64
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sem4_aizo_proj1_mb_darwin_amd64
+          asset_name: sem4_aizo_proj1_mb_darwin_amd64
+          asset_content_type: application/octet-stream
 
       - name: Upload macOS (ARM) build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-release-asset@v1
+        env:
+          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
-          name: sem4_aizo_proj1_mb-macos-arm
-          path: ./sem4_aizo_proj1_mb_darwin_arm64
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sem4_aizo_proj1_mb_darwin_arm64
+          asset_name: sem4_aizo_proj1_mb_darwin_arm64
+          asset_content_type: application/octet-stream
 
       - name: Upload Linux build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-release-asset@v1
+        env:
+          ACCOUNT_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
-          name: sem4_aizo_proj1_mb-linux
-          path: ./sem4_aizo_proj1_mb_linux_amd64
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./sem4_aizo_proj1_mb_linux_amd64
+          asset_name: sem4_aizo_proj1_mb_linux_amd64
+          asset_content_type: application/octet-stream
