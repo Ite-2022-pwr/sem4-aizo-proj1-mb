@@ -65,37 +65,44 @@ func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list
 func RunSortFromFile(typeChosen int, sortType string, qsPivot, ssGap, reps int, ifh fileHandler.InputFileHandler, ofh fileHandler.OutputFileHandler) {
 	switch typeChosen {
 	case 0:
-		list := ifh.GetIntList()
+		list := make([]int, len(ifh.GetIntList()))
+		copy(list, ifh.GetIntList())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 1:
-		list := ifh.GetFloat64List()
+		list := make([]float64, len(ifh.GetFloat64List()))
+		copy(list, ifh.GetFloat64List())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 2:
-		list := ifh.GetFloat32List()
+		list := make([]float32, len(ifh.GetFloat32List()))
+		copy(list, ifh.GetFloat32List())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 3:
-		list := ifh.GetInt32List()
+		list := make([]int32, len(ifh.GetInt32List()))
+		copy(list, ifh.GetInt32List())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 4:
-		list := ifh.GetInt64List()
+		list := make([]int64, len(ifh.GetInt64List()))
+		copy(list, ifh.GetInt64List())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 5:
-		list := ifh.GetStringList()
+		list := make([]string, len(ifh.GetStringList()))
+		copy(list, ifh.GetStringList())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	default:
-		list := ifh.GetIntList()
+		list := make([]int, len(ifh.GetIntList()))
+		copy(list, ifh.GetIntList())
 		for i := 0; i < reps; i++ {
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}

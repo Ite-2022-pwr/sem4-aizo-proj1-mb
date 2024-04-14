@@ -1,8 +1,15 @@
 package benchmarks
 
-import "sync"
+import (
+	"log"
+	"projekt1/timeTrack"
+	"sync"
+	"time"
+)
 
 func RunFullBenchmark() {
+	log.Printf("Benchmark started")
+	defer timeTrack.TimeTrack(time.Now(), "Benchmark")
 
 	var wg sync.WaitGroup
 
@@ -24,4 +31,5 @@ func RunFullBenchmark() {
 		runIsBenchmark()
 	}()
 	wg.Wait()
+	log.Printf("Benchmark finished")
 }

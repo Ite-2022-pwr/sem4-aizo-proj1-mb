@@ -3,29 +3,29 @@ package benchmarks
 import "sync"
 
 func runIsBenchmark() {
+	var wg sync.WaitGroup
 	for i := 0; i < 6; i++ {
-		var wg sync.WaitGroup
 		wg.Add(5)
 		go func() {
 			defer wg.Done()
-			SingleConfigBenchmark(i, 0, 0, 10, "i", "random")
+			SingleConfigBenchmark(i, 0, 0, 100, "i", "random")
 		}()
 		go func() {
 			defer wg.Done()
-			SingleConfigBenchmark(i, 0, 0, 10, "i", "sorted")
+			SingleConfigBenchmark(i, 0, 0, 100, "i", "sorted")
 		}()
 		go func() {
 			defer wg.Done()
-			SingleConfigBenchmark(i, 0, 0, 10, "i", "reverseSorted")
+			SingleConfigBenchmark(i, 0, 0, 100, "i", "reverseSorted")
 		}()
 		go func() {
 			defer wg.Done()
-			SingleConfigBenchmark(i, 0, 0, 10, "i", "thirdSorted")
+			SingleConfigBenchmark(i, 0, 0, 100, "i", "thirdSorted")
 		}()
 		go func() {
 			defer wg.Done()
-			SingleConfigBenchmark(i, 0, 0, 10, "i", "twoThirdsSorted")
+			SingleConfigBenchmark(i, 0, 0, 100, "i", "twoThirdsSorted")
 		}()
-		wg.Wait()
 	}
+	wg.Wait()
 }
