@@ -3,8 +3,8 @@ package benchmarks
 import "sync"
 
 func runHsBenchmark() {
-	var wg = sync.WaitGroup{}
 	for i := 0; i < 6; i++ {
+		var wg = sync.WaitGroup{}
 		wg.Add(5)
 		go func() {
 			defer wg.Done()
@@ -26,6 +26,6 @@ func runHsBenchmark() {
 			defer wg.Done()
 			SingleConfigBenchmark(i, 0, 0, 100, "h", "twoThirdsSorted")
 		}()
+		wg.Wait()
 	}
-	wg.Wait()
 }
