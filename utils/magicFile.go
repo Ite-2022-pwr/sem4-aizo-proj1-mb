@@ -178,6 +178,6 @@ func generateTwoThirdsSortedInput() {
 		stringList := make([]string, length)
 		stringList = GenerateRandomStringList(length)
 		sort.Strings(stringList[0:sortEnd])
-		SaveListToFile(stringList, fmt.Sprintf("thirdSortedString-%d.txt", i))
+		SaveListToFile(stringList, fmt.Sprintf("twoThirdsSortedString-%d.txt", i))
 	}
 }
