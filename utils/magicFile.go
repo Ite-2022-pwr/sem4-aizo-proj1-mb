@@ -148,7 +148,7 @@ func generateRandomInput() {
 
 func generateThirdSortedInput() {
 	for i := 1; i <= 10; i++ {
-		intList := make([]int, 10000*i)
+		intList := make([]int, 3333*i)
 		for j := 0; j < 3333*i; j++ {
 			intList[j] = j
 		}
@@ -170,13 +170,13 @@ func generateThirdSortedInput() {
 		SaveListToFile(float32list, fmt.Sprintf("thirdSortedFloat32-%d.txt", i))
 	}
 	for i := 1; i <= 10; i++ {
-		int32List := make([]int32, 10000*i)
+		int32List := make([]int32, 3333*i)
 		sort.Slice(int32List, func(i, j int) bool { return int32List[i] < int32List[j] })
 		int32List = append(int32List, GenerateRandomInt32List(6667*i)...)
 		SaveListToFile(int32List, fmt.Sprintf("thirdSortedInt32-%d.txt", i))
 	}
 	for i := 1; i <= 10; i++ {
-		int64list := make([]int64, 10000*i)
+		int64list := make([]int64, 3333*i)
 		sort.Slice(int64list, func(i, j int) bool { return int64list[i] < int64list[j] })
 		int64list = append(int64list, GenerateRandomInt64List(6667*i)...)
 		SaveListToFile(int64list, fmt.Sprintf("thirdSortedInt64-%d.txt", i))
@@ -192,7 +192,7 @@ func generateThirdSortedInput() {
 
 func generateTwoThirdsSortedInput() {
 	for i := 1; i <= 10; i++ {
-		intList := make([]int, 10000*i)
+		intList := make([]int, 6667*i)
 		for j := 0; j < 6667*i; j++ {
 			intList[j] = j
 		}
@@ -214,13 +214,13 @@ func generateTwoThirdsSortedInput() {
 		SaveListToFile(float32list, fmt.Sprintf("twoThirdsSortedFloat32-%d.txt", i))
 	}
 	for i := 1; i <= 10; i++ {
-		int32List := make([]int32, 10000*i)
+		int32List := make([]int32, 6667*i)
 		sort.Slice(int32List, func(i, j int) bool { return int32List[i] < int32List[j] })
 		int32List = append(int32List, GenerateRandomInt32List(3333*i)...)
 		SaveListToFile(int32List, fmt.Sprintf("twoThirdsSortedInt32-%d.txt", i))
 	}
 	for i := 1; i <= 10; i++ {
-		int64list := make([]int64, 10000*i)
+		int64list := make([]int64, 6667*i)
 		sort.Slice(int64list, func(i, j int) bool { return int64list[i] < int64list[j] })
 		int64list = append(int64list, GenerateRandomInt64List(3333*i)...)
 		SaveListToFile(int64list, fmt.Sprintf("twoThirdsSortedInt64-%d.txt", i))

@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"golang.org/x/exp/constraints"
+	"log"
 	"math"
 	"projekt1/fileHandler"
 	"projekt1/mySort"
@@ -44,18 +45,20 @@ func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list
 	}
 	fmt.Print("...]\n")
 	fmt.Println()
+	listAfterSort := make([]T, len(list))
 	switch method {
 	case "q":
-		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		listAfterSort, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	case "i":
-		_, timeTracked = mySort.InsertionSort(list)
+		listAfterSort, timeTracked = mySort.InsertionSort(list)
 	case "h":
-		_, timeTracked = mySort.HeapSort(list)
+		listAfterSort, timeTracked = mySort.HeapSort(list)
 	case "s":
-		_, timeTracked = mySort.ShellSort(list, len(list), ssgap)
+		listAfterSort, timeTracked = mySort.ShellSort(list, len(list), ssgap)
 	default:
-		_, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
+		listAfterSort, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	}
+	log.Printf("Posortowano poprawnie: %t", CheckSortedList(listAfterSort))
 	ofh.AddResult(timeTracked, len(list), rep)
 }
 
