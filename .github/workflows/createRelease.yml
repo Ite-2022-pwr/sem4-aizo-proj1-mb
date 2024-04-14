@@ -1,0 +1,70 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.22.2' # You can change this to your desired Go version
+
+      - name: Build for Windows
+        run: GOOS=windows GOARCH=amd64 go build -o sem4_aizo_proj1_mb_amd64.exe .
+
+      - name: Build for macOS (Intel)
+        run: GOOS=darwin GOARCH=amd64 go build -o sem4_aizo_proj1_mb_darwin_amd64 .
+
+      - name: Build for macOS (ARM)
+        run: GOOS=darwin GOARCH=arm64 go build -o sem4_aizo_proj1_mb_darwin_arm64 .
+
+      - name: Build for Linux
+        run: GOOS=linux GOARCH=amd64 go build -o sem4_aizo_proj1_mb_linux_amd64 .
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
+          body: |
+            Changes in this release:
+            - Describe your changes here
+          draft: false
+          prerelease: false
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v2
+        with:
+          name: sem4_aizo_proj1_mb
+          path: ./sem4_aizo_proj1_mb_amd64.exe
+
+      - name: Upload macOS (Intel) build
+        uses: actions/upload-artifact@v2
+        with:
+          name: sem4_aizo_proj1_mb
+          path: ./sem4_aizo_proj1_mb_darwin_amd64
+
+      - name: Upload macOS (ARM) build
+        uses: actions/upload-artifact@v2
+        with:
+          name: sem4_aizo_proj1_mb-macos-arm
+          path: ./sem4_aizo_proj1_mb_darwin_arm64
+
+      - name: Upload Linux build
+        uses: actions/upload-artifact@v2
+        with:
+          name: sem4_aizo_proj1_mb-linux
+          path: ./sem4_aizo_proj1_mb_linux_amd64
