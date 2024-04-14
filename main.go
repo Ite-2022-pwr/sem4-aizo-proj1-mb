@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"projekt1/benchmarks"
 	"projekt1/utils"
 	"sync"
 )
@@ -25,11 +26,14 @@ func main() {
 	if *magicFlagPtr {
 		fmt.Println("Magic flag was set!")
 		utils.GenerateInputsForTests()
+		return
 	}
 	if *fullBenchmarkPtr {
-		RunFullBenchmark()
+		benchmarks.RunFullBenchmark()
+		return
 	} else if *interactivePtr {
 		Menu()
+		return
 	} else if *quickRunPtr {
 		wg := sync.WaitGroup{}
 		wg.Add(1)
