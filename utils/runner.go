@@ -65,45 +65,45 @@ func runSort[T constraints.Ordered](method string, ssgap, qspivot, rep int, list
 func RunSortFromFile(typeChosen int, sortType string, qsPivot, ssGap, reps int, ifh fileHandler.InputFileHandler, ofh fileHandler.OutputFileHandler) {
 	switch typeChosen {
 	case 0:
-		list := make([]int, len(ifh.GetIntList()))
-		copy(list, ifh.GetIntList())
 		for i := 0; i < reps; i++ {
+			list := make([]int, len(ifh.GetIntList()))
+			copy(list, ifh.GetIntList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 1:
-		list := make([]float64, len(ifh.GetFloat64List()))
-		copy(list, ifh.GetFloat64List())
 		for i := 0; i < reps; i++ {
+			list := make([]float64, len(ifh.GetFloat64List()))
+			copy(list, ifh.GetFloat64List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 2:
-		list := make([]float32, len(ifh.GetFloat32List()))
-		copy(list, ifh.GetFloat32List())
 		for i := 0; i < reps; i++ {
+			list := make([]float32, len(ifh.GetFloat32List()))
+			copy(list, ifh.GetFloat32List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 3:
-		list := make([]int32, len(ifh.GetInt32List()))
-		copy(list, ifh.GetInt32List())
 		for i := 0; i < reps; i++ {
+			list := make([]int32, len(ifh.GetInt32List()))
+			copy(list, ifh.GetInt32List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 4:
-		list := make([]int64, len(ifh.GetInt64List()))
-		copy(list, ifh.GetInt64List())
 		for i := 0; i < reps; i++ {
+			list := make([]int64, len(ifh.GetInt64List()))
+			copy(list, ifh.GetInt64List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 5:
-		list := make([]string, len(ifh.GetStringList()))
-		copy(list, ifh.GetStringList())
 		for i := 0; i < reps; i++ {
+			list := make([]string, len(ifh.GetStringList()))
+			copy(list, ifh.GetStringList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	default:
-		list := make([]int, len(ifh.GetIntList()))
-		copy(list, ifh.GetIntList())
 		for i := 0; i < reps; i++ {
+			list := make([]int, len(ifh.GetIntList()))
+			copy(list, ifh.GetIntList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	}
