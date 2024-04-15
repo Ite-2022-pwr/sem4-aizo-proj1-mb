@@ -28,33 +28,41 @@ jobs:
             echo "PR_BASE_BRANCH=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")" >> $GITHUB_ENV
           fi
 
-      - name: Get previous release commit
-        id: get_previous_release
-        run: |
-          PREVIOUS_RELEASE=$(git tag --sort=-creatordate | grep -m 1 '')
-          echo "PREVIOUS_RELEASE=$PREVIOUS_RELEASE" >> $GITHUB_ENV
-
-      - name: Get commits since previous release
+      - name: Get commits since base branch
         id: get_commits
+        if: steps.pr_info.outputs.PR_BASE_BRANCH
         run: |
-          COMMITS=$(git log --pretty=format:"%s" ${{ env.PREVIOUS_RELEASE }}..HEAD --grep="release")
+          LAST_COMMIT=$(git log --pretty=format:"%H" -n 1)
+          COMMITS=$(git log --pretty=format:"%s" ${{ steps.pr_info.outputs.PR_BASE_BRANCH }}..${LAST_COMMIT})
           echo "COMMITS=$COMMITS" >> $GITHUB_ENV
+
+      - name: Build for Windows
+        run: GOOS=windows GOARCH=amd64 go build -o sem4_aizo_proj1_mb_windows_amd64.exe .
+
+      - name: Build for macOS (Intel)
+        run: GOOS=darwin GOARCH=amd64 go build -o sem4_aizo_proj1_mb_darwin_amd64 .
+
+      - name: Build for macOS (ARM)
+        run: GOOS=darwin GOARCH=arm64 go build -o sem4_aizo_proj1_mb_darwin_arm64 .
+
+      - name: Build for Linux
+        run: GOOS=linux GOARCH=amd64 go build -o sem4_aizo_proj1_mb_linux_amd64 .
 
       - name: Create Release
         id: create_release
-        if: steps.get_commits.outputs.COMMITS != ''
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
-          body: ${{ steps.get_commits.outputs.COMMITS }}
+          body: |
+            ${{ steps.get_commits.outputs.COMMITS }}
           draft: false
           prerelease: false
 
       - name: Upload Release Assets
-        if: steps.create_release.outputs.upload_url
+        id: upload-release-assets
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
@@ -65,7 +73,6 @@ jobs:
           asset_content_type: application/octet-stream
 
       - name: Upload macOS (Intel) build
-        if: steps.create_release.outputs.upload_url
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
@@ -76,7 +83,6 @@ jobs:
           asset_content_type: application/octet-stream
 
       - name: Upload macOS (ARM) build
-        if: steps.create_release.outputs.upload_url
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
@@ -87,7 +93,6 @@ jobs:
           asset_content_type: application/octet-stream
 
       - name: Upload Linux build
-        if: steps.create_release.outputs.upload_url
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACCOUNT_TOKEN }}
