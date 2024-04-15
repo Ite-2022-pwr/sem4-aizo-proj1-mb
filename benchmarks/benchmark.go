@@ -56,4 +56,5 @@ func SingleConfigBenchmark(typeChosen, pivotChosen, ssGapChosen, repsChosen int,
 		}
 	}
 	wg.Wait()
+	log.Printf("Benchmark dla %s zakończony", sortingMethodChosenName)
 }
