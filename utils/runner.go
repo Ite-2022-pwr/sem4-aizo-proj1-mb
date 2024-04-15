@@ -67,42 +67,49 @@ func RunSortFromFile(typeChosen int, sortType string, qsPivot, ssGap, reps int, 
 	case 0:
 		for i := 0; i < reps; i++ {
 			list := make([]int, len(ifh.GetIntList()))
+
 			copy(list, ifh.GetIntList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 1:
 		for i := 0; i < reps; i++ {
 			list := make([]float64, len(ifh.GetFloat64List()))
+
 			copy(list, ifh.GetFloat64List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 2:
 		for i := 0; i < reps; i++ {
 			list := make([]float32, len(ifh.GetFloat32List()))
+
 			copy(list, ifh.GetFloat32List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 3:
 		for i := 0; i < reps; i++ {
 			list := make([]int32, len(ifh.GetInt32List()))
+
 			copy(list, ifh.GetInt32List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 4:
 		for i := 0; i < reps; i++ {
 			list := make([]int64, len(ifh.GetInt64List()))
+
 			copy(list, ifh.GetInt64List())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 5:
 		for i := 0; i < reps; i++ {
 			list := make([]string, len(ifh.GetStringList()))
+
 			copy(list, ifh.GetStringList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	default:
 		for i := 0; i < reps; i++ {
 			list := make([]int, len(ifh.GetIntList()))
+
 			copy(list, ifh.GetIntList())
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
@@ -112,38 +119,45 @@ func RunSortFromFile(typeChosen int, sortType string, qsPivot, ssGap, reps int, 
 func RunSortOfType(typeChosen int, sortType string, qsPivot, ssGap, reps, lines int, ofh fileHandler.OutputFileHandler) {
 	switch typeChosen {
 	case 0:
-		list := GenerateRandomIntList(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomIntList(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 1:
-		list := GenerateRandomFloat64List(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomFloat64List(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 2:
-		list := GenerateRandomFloat32List(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomFloat32List(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 3:
-		list := GenerateRandomInt32List(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomInt32List(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 4:
-		list := GenerateRandomInt64List(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomInt64List(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	case 5:
-		list := GenerateRandomStringList(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomStringList(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	default:
-		list := GenerateRandomIntList(lines)
 		for i := 0; i < reps; i++ {
+			list := GenerateRandomIntList(lines)
+
 			runSort(sortType, ssGap, qsPivot, i, list, ofh)
 		}
 	}
