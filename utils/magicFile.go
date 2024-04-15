@@ -3,7 +3,6 @@ package utils
 import (
 	"fmt"
 	"log"
-	"math"
 	"sort"
 )
 
@@ -21,8 +20,8 @@ func GenerateInputsForTests() {
 }
 
 func generateSortedInput() {
-	for i := 0; i <= 7; i++ {
-		length := 10000 * int(math.Pow(2, float64(i)))
+	for i := 1; i <= 7; i++ {
+		length := 10000 * i
 		log.Printf("Generating sorted input of length %d", length)
 		intList := make([]int, length)
 		for j := 0; j < length; j++ {
@@ -55,8 +54,8 @@ func generateSortedInput() {
 }
 
 func generateReverseSortedInput() {
-	for i := 0; i <= 7; i++ {
-		length := 10000 * int(math.Pow(2, float64(i)))
+	for i := 1; i <= 7; i++ {
+		length := 10000 * i
 		log.Printf("Generating reverse sorted input of length %d", length)
 		intList := make([]int, length)
 		for j := 0; j < length; j++ {
@@ -94,8 +93,8 @@ func generateReverseSortedInput() {
 }
 
 func generateRandomInput() {
-	for i := 0; i <= 7; i++ {
-		length := 10000 * int(math.Pow(2, float64(i)))
+	for i := 1; i <= 7; i++ {
+		length := 10000 * i
 		log.Printf("Generating random input of length %d", length)
 		intList := make([]int, length)
 		intList = GenerateRandomIntList(length)
@@ -119,8 +118,8 @@ func generateRandomInput() {
 }
 
 func generateThirdSortedInput() {
-	for i := 0; i <= 7; i++ {
-		length := 10000 * int(math.Pow(2, float64(i)))
+	for i := 1; i <= 7; i++ {
+		length := 10000 * i
 		log.Printf("Generating third sorted input of length %d", length)
 		sortEnd := length / 3
 		intList := make([]int, length)
@@ -151,8 +150,8 @@ func generateThirdSortedInput() {
 }
 
 func generateTwoThirdsSortedInput() {
-	for i := 0; i <= 7; i++ {
-		length := 10000 * int(math.Pow(2, float64(i)))
+	for i := 1; i <= 7; i++ {
+		length := 10000 * i
 		log.Printf("Generating two thirds sorted input of length %d", length)
 		sortEnd := (length / 3) * 2
 		intList := make([]int, length)
