@@ -65,7 +65,7 @@ func SaveListToFile[T any](list []T, filename string) {
 func GenerateRandomIntList(length int) []int {
 	output := make([]int, length)
 	for i := 0; i < length; i++ {
-		output[i] = rand.Int() % 1000
+		output[i] = rand.Int() % 100000
 	}
 	return output
 }
@@ -89,7 +89,7 @@ func GenerateRandomFloat32List(length int) []float32 {
 func GenerateRandomInt32List(length int) []int32 {
 	output := make([]int32, length)
 	for i := 0; i < length; i++ {
-		output[i] = int32(rand.Int() % 100000)
+		output[i] = int32(rand.Int() % 1000000)
 	}
 	return output
 }
@@ -97,7 +97,7 @@ func GenerateRandomInt32List(length int) []int32 {
 func GenerateRandomInt64List(length int) []int64 {
 	output := make([]int64, length)
 	for i := 0; i < length; i++ {
-		output[i] = int64(rand.Int() % 100000)
+		output[i] = int64(rand.Int() % 1000000)
 	}
 	return output
 }
