@@ -9,9 +9,9 @@ import (
 func RunFullBenchmark() {
 	log.Printf("Benchmark started")
 	defer timeTrack.TimeTrack(time.Now(), "Benchmark")
-	runSsBenchmark()
-	runHsBenchmark()
-	runIsBenchmark()
-	runQsBenchmark()
+	RunSsBenchmark()
+	RunHsBenchmark()
+	RunIsBenchmark()
+	RunQsBenchmark()
 	log.Printf("Benchmark finished")
 }

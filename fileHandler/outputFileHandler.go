@@ -23,6 +23,12 @@ func (fh *OutputFileHandler) AddResult(timeInNs int64, listSize, rep int) {
 	fh.Times[rep] = timeInNs
 }
 
+func (fh *OutputFileHandler) AddResultLists(lines []int, times []int64) {
+	fh.Sizes = lines
+	fh.Times = times
+
+}
+
 func (fh *OutputFileHandler) WriteToFile() {
 	fh.file, _ = os.Create(fh.FileName)
 	writer := bufio.NewWriter(fh.file)

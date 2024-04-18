@@ -1,11 +1,11 @@
 package benchmarks
 
-func runHsBenchmark() {
+func RunHsBenchmark() {
 	for i := 0; i < 6; i++ {
-		SingleConfigBenchmark(i, 0, 0, 100, "h", "random")
-		SingleConfigBenchmark(i, 0, 0, 100, "h", "sorted")
-		SingleConfigBenchmark(i, 0, 0, 100, "h", "reverseSorted")
-		SingleConfigBenchmark(i, 0, 0, 100, "h", "thirdSorted")
-		SingleConfigBenchmark(i, 0, 0, 100, "h", "twoThirdsSorted")
+		SingleConfigBenchmark(i, 0, 0, 100, 1, 0)
+		SingleConfigBenchmark(i, 0, 0, 100, 1, 1)
+		SingleConfigBenchmark(i, 0, 0, 100, 1, 2)
+		SingleConfigBenchmark(i, 0, 0, 100, 1, 3)
+		SingleConfigBenchmark(i, 0, 0, 100, 1, 4)
 	}
 }

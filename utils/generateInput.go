@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"projekt1/timeTrack"
+	"projekt1/utils/listGenerators"
 	"strconv"
 	"time"
 )
@@ -62,56 +63,22 @@ func SaveListToFile[T any](list []T, filename string) {
 	}
 }
 
-func GenerateRandomIntList(length int) []int {
-	output := make([]int, length)
-	for i := 0; i < length; i++ {
-		output[i] = rand.Int() % 100000
+func GenerateList(typeChosen, generationStrategy, length int) (list []any) {
+	switch typeChosen {
+	case 0:
+		list = CastToAnySlice(listGenerators.GenerateStdIntList(generationStrategy, length))
+	case 1:
+		list = CastToAnySlice(listGenerators.GenerateFloat64List(generationStrategy, length))
+	case 2:
+		list = CastToAnySlice(listGenerators.GenerateFloat32List(generationStrategy, length))
+	case 3:
+		list = CastToAnySlice(listGenerators.GenerateInt32List(generationStrategy, length))
+	case 4:
+		list = CastToAnySlice(listGenerators.GenerateInt64List(generationStrategy, length))
+	case 5:
+		list = CastToAnySlice(listGenerators.GenerateStringList(generationStrategy, length))
+	default:
+		list = CastToAnySlice(listGenerators.GenerateStdIntList(generationStrategy, length))
 	}
-	return output
-}
-
-func GenerateRandomFloat64List(length int) []float64 {
-	output := make([]float64, length)
-	for i := 0; i < length; i++ {
-		output[i] = rand.Float64() * 100000
-	}
-	return output
-}
-
-func GenerateRandomFloat32List(length int) []float32 {
-	output := make([]float32, length)
-	for i := 0; i < length; i++ {
-		output[i] = float32(rand.Float32() * 100000)
-	}
-	return output
-}
-
-func GenerateRandomInt32List(length int) []int32 {
-	output := make([]int32, length)
-	for i := 0; i < length; i++ {
-		output[i] = int32(rand.Int() % 1000000)
-	}
-	return output
-}
-
-func GenerateRandomInt64List(length int) []int64 {
-	output := make([]int64, length)
-	for i := 0; i < length; i++ {
-		output[i] = int64(rand.Int() % 1000000)
-	}
-	return output
-}
-
-func GenerateRandomStringList(length int) []string {
-	output := make([]string, length)
-	charRunes := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	for i := 0; i < length; i++ {
-		b := make([]rune, (rand.Int()%16)+1)
-		for i := range b {
-			b[i] = charRunes[rand.Intn(len(charRunes))]
-		}
-		tempStr := string(b)
-		output[i] = tempStr
-	}
-	return output
+	return list
 }

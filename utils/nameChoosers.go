@@ -49,15 +49,15 @@ func SsGapNameChooser(ssGapChosen int) (ssGapName string) {
 	return ssGapName
 }
 
-func SortingMethodNameChooser(sortingMethodChosen string) (sortingMethodChosenName string) {
+func SortingMethodNameChooser(sortingMethodChosen int) (sortingMethodChosenName string) {
 	switch sortingMethodChosen {
-	case "q":
+	case 0:
 		sortingMethodChosenName = "quicksort"
-	case "h":
+	case 1:
 		sortingMethodChosenName = "heapsort"
-	case "i":
+	case 2:
 		sortingMethodChosenName = "insertionsort"
-	case "s":
+	case 3:
 		sortingMethodChosenName = "shellsort"
 	default:
 		sortingMethodChosenName = "quicksort"

@@ -5,6 +5,7 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"projekt1/utils"
 	"strconv"
 )
 
@@ -30,6 +31,26 @@ func (fh *InputFileHandler) ReadFile() {
 		lineStr := scanner.Text()
 		fh.List = append(fh.List, lineStr)
 	}
+}
+
+func (fh *InputFileHandler) GetListOfType(typeChosen int) (output []any) {
+	switch typeChosen {
+	case 0:
+		output = utils.CastToAnySlice(fh.GetIntList())
+	case 1:
+		output = utils.CastToAnySlice(fh.GetFloat64List())
+	case 2:
+		output = utils.CastToAnySlice(fh.GetFloat32List())
+	case 3:
+		output = utils.CastToAnySlice(fh.GetInt32List())
+	case 4:
+		output = utils.CastToAnySlice(fh.GetInt64List())
+	case 5:
+		output = utils.CastToAnySlice(fh.GetStringList())
+	default:
+		output = utils.CastToAnySlice(fh.GetIntList())
+	}
+	return output
 }
 
 func (fh *InputFileHandler) GetIntList() []int {
