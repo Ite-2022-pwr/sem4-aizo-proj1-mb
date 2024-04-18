@@ -12,7 +12,7 @@ func Menu() {
 	var sortMethodChosen = 0
 	var ssGapChosen = 0
 	var qsPivotChosen = 0
-	var repsChosen = 0
+	var repsChosen = 1
 	var lastRunTimes []int64
 	var lastRunLines []int
 

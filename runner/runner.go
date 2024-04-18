@@ -61,9 +61,12 @@ func RunFromFlags(inputFilename, outputFilename string, method, typeChosen, ssGa
 
 func repeatSort[T constraints.Ordered](method, ssGap, qsPivot, reps int, list []T) ([]T, []int64) {
 	var timesTracked []int64
+	timesTracked = make([]int64, reps)
 	var totalTime int64 = 0
 	for i := 0; i < reps; i++ {
-		list, timesTracked[i] = runSort(method, ssGap, qsPivot, list)
+		tempList := make([]T, len(list))
+		copy(tempList, list)
+		_, timesTracked[i] = runSort(method, ssGap, qsPivot, tempList)
 	}
 	for _, time := range timesTracked {
 		totalTime += time
