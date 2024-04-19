@@ -1,9 +1,12 @@
 package menu
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"projekt1/menu/submenus"
 	"projekt1/runner"
+	"projekt1/utils"
 )
 
 func Menu() {
@@ -16,7 +19,7 @@ func Menu() {
 	var lastRunTimes []int64
 	var lastRunLines []int
 
-	for true {
+	for {
 		fmt.Println()
 		actionChosen := submenus.ChooseAction()
 		switch actionChosen {
@@ -41,5 +44,9 @@ func Menu() {
 		case 9:
 			return
 		}
+		reader := bufio.NewReader(os.Stdin)
+		fmt.Println("Wciśnij dowolny klawisz, aby kontynuować")
+		_, err := reader.ReadString('\n')
+		utils.Check(err)
 	}
 }

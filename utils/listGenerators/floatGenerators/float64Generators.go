@@ -7,7 +7,7 @@ import (
 
 func GenerateRandomFloat64List(length int) (output []float64) {
 	output = make([]float64, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = rand.Float64()
 	}
 	return output
@@ -15,7 +15,7 @@ func GenerateRandomFloat64List(length int) (output []float64) {
 
 func GenerateSortedFloat64List(length int) (output []float64) {
 	output = make([]float64, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = float64(i) / 10000
 	}
 	return output
@@ -23,7 +23,7 @@ func GenerateSortedFloat64List(length int) (output []float64) {
 
 func GenerateReverseSortedFloat64List(length int) (output []float64) {
 	output = make([]float64, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = float64(length-i) / 10000
 	}
 	return output

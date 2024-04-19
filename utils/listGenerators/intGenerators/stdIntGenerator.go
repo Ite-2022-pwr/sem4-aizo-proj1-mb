@@ -15,7 +15,7 @@ func GenerateRandomIntList(length int) (output []int) {
 
 func GenerateSortedIntList(length int) (output []int) {
 	output = make([]int, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = i
 	}
 	return output
@@ -23,7 +23,7 @@ func GenerateSortedIntList(length int) (output []int) {
 
 func GenerateReverseSortedIntList(length int) (output []int) {
 	output = make([]int, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = length - i
 	}
 	return output

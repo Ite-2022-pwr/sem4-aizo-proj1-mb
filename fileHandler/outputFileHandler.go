@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"projekt1/utils"
 )
 
 type OutputFileHandler struct {
@@ -48,5 +49,5 @@ func (fh *OutputFileHandler) WriteToFile() {
 			return
 		}
 	}
-	writer.Flush()
+	utils.Check(writer.Flush())
 }

@@ -68,8 +68,8 @@ func repeatSort[T constraints.Ordered](method, ssGap, qsPivot, reps int, list []
 		copy(tempList, list)
 		_, timesTracked[i] = runSort(method, ssGap, qsPivot, tempList)
 	}
-	for _, time := range timesTracked {
-		totalTime += time
+	for _, trackedTime := range timesTracked {
+		totalTime += trackedTime
 	}
 	avgTime := totalTime / int64(reps)
 	avgTimeDuration := time.Duration(avgTime)
@@ -80,7 +80,7 @@ func repeatSort[T constraints.Ordered](method, ssGap, qsPivot, reps int, list []
 func runSort[T constraints.Ordered](method, ssgap, qspivot int, list []T) ([]T, int64) {
 	var timeTracked int64
 	tempStr := "pierwsze 10% lub 50 elementów listy przed sortowaniem: ["
-	firstTenPercent := int(math.Ceil(float64(len(list)) * 0.1))
+	firstTenPercent := int(math.Min(math.Ceil(float64(len(list))*0.1), 50))
 	for i := 0; i < firstTenPercent; i++ {
 		tempStr += fmt.Sprintf("%v; ", list[i])
 	}
@@ -100,5 +100,11 @@ func runSort[T constraints.Ordered](method, ssgap, qspivot int, list []T) ([]T, 
 		listAfterSort, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	}
 	log.Printf("Posortowano poprawnie: %t", utils.CheckSortedList(listAfterSort))
+	tempStr = "pierwsze 10% lub 50 elementów listy po sortowaniu: ["
+	for i := 0; i < firstTenPercent; i++ {
+		tempStr += fmt.Sprintf("%v; ", listAfterSort[i])
+	}
+	tempStr += fmt.Sprintf("...]\n")
+	log.Println(tempStr)
 	return list, timeTracked
 }

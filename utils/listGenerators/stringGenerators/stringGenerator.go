@@ -8,7 +8,7 @@ import (
 func GenerateRandomStringList(length int) (output []string) {
 	output = make([]string, length)
 	charRunes := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	for i, _ := range output {
+	for i := range output {
 		b := make([]rune, (rand.Int()%16)+1)
 		for i := range b {
 			b[i] = charRunes[rand.Intn(len(charRunes))]

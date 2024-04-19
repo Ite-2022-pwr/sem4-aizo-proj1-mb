@@ -22,6 +22,7 @@ func QuickRun() {
 	var wg sync.WaitGroup
 	for i := 0; i < 7; i++ {
 		wg.Add(1)
+		i := i
 		go func() {
 			floatlists[i] = make([]float64, n)
 			intLists[i] = make([]int, n)

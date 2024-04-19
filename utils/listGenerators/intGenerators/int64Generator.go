@@ -15,7 +15,7 @@ func GenerateRandomInt64List(length int) (output []int64) {
 
 func GenerateSortedInt64List(length int) (output []int64) {
 	output = make([]int64, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = int64(i)
 	}
 	return output
@@ -23,7 +23,7 @@ func GenerateSortedInt64List(length int) (output []int64) {
 
 func GenerateReverseSortedInt64List(length int) (output []int64) {
 	output = make([]int64, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = int64(length - i)
 	}
 	return output

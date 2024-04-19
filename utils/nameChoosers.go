@@ -64,3 +64,21 @@ func SortingMethodNameChooser(sortingMethodChosen int) (sortingMethodChosenName 
 	}
 	return sortingMethodChosenName
 }
+
+func CaseTypeNameChooser(caseTypeChosen int) (caseTypeChosenName string) {
+	switch caseTypeChosen {
+	case 0:
+		caseTypeChosenName = "random"
+	case 1:
+		caseTypeChosenName = "sorted"
+	case 2:
+		caseTypeChosenName = "reverseSorted"
+	case 3:
+		caseTypeChosenName = "thirdSorted"
+	case 4:
+		caseTypeChosenName = "twoThirdsSorted"
+	default:
+		caseTypeChosenName = "random"
+	}
+	return caseTypeChosenName
+}

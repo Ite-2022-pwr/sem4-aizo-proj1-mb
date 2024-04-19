@@ -35,7 +35,7 @@ func ShellSort[T constraints.Ordered](list []T, n, gapType int) (sortedList []T,
 		for i := gap; i < n; i++ {
 			temp := list[i]
 			j := i
-			for j = j; j >= gap && list[j-gap] > temp; j -= gap {
+			for ; j >= gap && list[j-gap] > temp; j -= gap {
 				list[j] = list[j-gap]
 			}
 			list[j] = temp

@@ -15,7 +15,7 @@ func GenerateRandomInt32List(length int) []int32 {
 
 func GenerateSortedInt32List(length int) []int32 {
 	output := make([]int32, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = int32(i)
 	}
 	return output
@@ -23,7 +23,7 @@ func GenerateSortedInt32List(length int) []int32 {
 
 func GenerateReverseSortedInt32List(length int) []int32 {
 	output := make([]int32, length)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = int32(length - i)
 	}
 	return output
