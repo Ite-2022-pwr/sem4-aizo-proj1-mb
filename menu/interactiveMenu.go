@@ -45,7 +45,7 @@ func Menu() {
 			return
 		}
 		reader := bufio.NewReader(os.Stdin)
-		fmt.Println("Wciśnij dowolny klawisz, aby kontynuować")
+		fmt.Println("Wciśnij enter, aby kontynuować")
 		_, err := reader.ReadString('\n')
 		utils.Check(err)
 	}
