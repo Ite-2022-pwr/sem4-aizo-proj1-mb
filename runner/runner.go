@@ -91,9 +91,9 @@ func runSort[T constraints.Ordered](method, ssgap, qspivot int, list []T) ([]T, 
 	case 0:
 		listAfterSort, timeTracked = mySort.QuickSort(list, 0, len(list)-1, qspivot)
 	case 1:
-		listAfterSort, timeTracked = mySort.InsertionSort(list)
-	case 2:
 		listAfterSort, timeTracked = mySort.HeapSort(list)
+	case 2:
+		listAfterSort, timeTracked = mySort.InsertionSort(list)
 	case 3:
 		listAfterSort, timeTracked = mySort.ShellSort(list, len(list), ssgap)
 	default:
